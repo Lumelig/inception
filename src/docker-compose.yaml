@@ -1,0 +1,17 @@
+mariadb:
+  build: ./requirements/mariadb
+  env_file: ../.env                  # provides MYSQL_DATABASE, MYSQL_USER
+  secrets:
+    - db_password                    # mounted at /run/secrets/db_password
+    - db_root_password               # mounted at /run/secrets/db_root_password
+  volumes:
+    - mariadb:/var/lib/mysql         # persistent data
+  networks:
+    - inception
+  restart: unless-stopped
+
+secrets:
+  db_password:
+    file: ../secrets/db_password.txt
+  db_root_password:
+    file: ../secrets/db_root_password.txt
