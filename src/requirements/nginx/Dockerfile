@@ -8,7 +8,7 @@ RUN apt-get update && apt-get install -y \
 COPY conf/nginx.conf /etc/nginx/nginx.conf
 
 COPY tools/init.sh /init.sh
-RUN comod +x /init.sh
+RUN chmod +x /init.sh
 
 EXPOSE 433
 
