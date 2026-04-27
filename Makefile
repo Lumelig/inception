@@ -1,5 +1,5 @@
 LOGIN = jpflegha
-DATA_PATH = /home/$(LOGIN)/inception
+DATA_PATH = /home/jpflegha/inception
 COMPOSE = docker compose -f src/docker-compose.yaml
 
 all: $(DATA_PATH)
@@ -15,7 +15,7 @@ down:
 
 clean: down
 	$(COMPOSE) down -v --rmi all
-	sudo rm -fr $(DATA_PATH)
+	#sudo rm -fr $(DATA_PATH)
 
 re: clean all
 
