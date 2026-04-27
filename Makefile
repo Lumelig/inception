@@ -3,7 +3,7 @@ DATA_PATH = /home/jpflegha/inception
 COMPOSE = docker compose -f src/docker-compose.yaml
 
 all: $(DATA_PATH)
-	sudo service docker start
+	service docker start
 	$(COMPOSE) up -d --build
 
 $(DATA_PATH):
