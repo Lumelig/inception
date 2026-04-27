@@ -3,7 +3,7 @@ FROM debian:bookworm-slim
 RUN apt-get update && apt-get install -y \
     nginx \
     openssl \
-    && rm -fr /var/lib/apt/list/*
+    && rm -fr /var/lib/apt/lists/*
 
 COPY conf/nginx.conf /etc/nginx/nginx.conf
 

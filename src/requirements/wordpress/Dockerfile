@@ -1,9 +1,9 @@
 FROM debian:bookworm-slim
-RUN apt-get update && apt-get install -t \
+RUN apt-get update && apt-get install -y \
     php-fpm \
     php-mysql \
     curl \ 
-    && rm -fr /var/lib/apt/list/*
+    && rm -fr /var/lib/apt/lists/*
 #curl is needed to download wp-cli.
 RUN curl -o https://raw.githubusercontent.com/wp-cli/builds/gh-pages/phar/wp-cli.phar \
 && chmod +x wp-cli.phar \
