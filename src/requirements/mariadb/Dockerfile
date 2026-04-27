@@ -8,5 +8,5 @@ COPY tools/init.sh /init.sh
 RUN chmod +x /init.sh
 EXPOSE 3306
 # mariadb defaul port This doesn't actually open the port — Docker Compose handles that.
-ENTRYPOINT ["init.sh"]
+ENTRYPOINT ["/init.sh"]
 #Run init script as PID 1 when the container starts. Use the exec form (square brackets) — this makes the script PID 1 directly, which is required.
