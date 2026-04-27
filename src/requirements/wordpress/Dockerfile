@@ -16,8 +16,8 @@ RUN curl -O https://raw.githubusercontent.com/wp-cli/builds/gh-pages/phar/wp-cli
 COPY conf/www.conf /etc/php/8.2/fpm/pool.d/www.conf
 
 # Copy and enable the entrypoint script
-COPY tools/init.sh /usr/local/bin/init.sh
-RUN chmod +x /usr/local/bin/init.sh
+COPY tools/init.sh /init.sh
+RUN chmod +x /init.sh
 
 # Create the web root directory where WordPress files will live
 RUN mkdir -p /var/www/html
