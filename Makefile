@@ -1,5 +1,5 @@
 LOGIN = jpflegha
-DATA_PATH = /home/jpflegha/inception
+DATA_PATH = /home/jpflegha/data
 COMPOSE = docker compose -f src/docker-compose.yaml
 
 all: $(DATA_PATH)
