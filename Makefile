@@ -1,6 +1,6 @@
 LOGIN = jpflegha
 DATA_PATH = /home/$(LOGIN)/inception
-COMPOSE = docker compose -f src/docker-compose.yaml
+COMPOSE = docker compose src/docker-compose.yaml
 
 all: $(DATA_PATH)
 	$(COMPOSE) up -d --build
