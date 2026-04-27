@@ -20,7 +20,7 @@ clean: down
 re: clean all
 
 ps:
-	$(COMPOSE) ps
+	docker ps
 
 logs:
 	$(COMPOSE) logs -f
