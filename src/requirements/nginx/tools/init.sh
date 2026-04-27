@@ -9,9 +9,3 @@ openssl req -x509 -nodes \
 -subj "/CN=${DOMAIN_NAME}" \
 -days 365                         
 exec nginx -g "daemon off;"
-
-#Without daemon off:
-#Start → background → container exits
-
-#With daemon off:
-#Start → foreground → container keeps running
