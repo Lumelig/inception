@@ -7,5 +7,7 @@ openssl req -x509 -nodes \
 -out /etc/nginx/ssl/nginx.crt \
 -keyout /etc/nginx/ssl/nginx.key \
 -subj "/CN=${DOMAIN_NAME}" \
--days 365                         
+-days 365    
+fi
+
 exec nginx -g "daemon off;"
