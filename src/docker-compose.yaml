@@ -1,83 +1,80 @@
-version: '3.8' #Specify the Docker Compose file format version. 3.8 supports secrets, named volumes.
+version: '3.8'
+
 services:
+
   mariadb:
-    build: 
-      - ./requirements/mariadb
-    env_file: 
-      - .env                  # provides MYSQL_DATABASE, MYSQL_USER
+    build:
+      context: ./requirements/mariadb
+      dockerfile: Dockerfile
+    image: mariadb
+    env_file:
+      - .env
     secrets:
-      - db_password                    # mounted at /run/secrets/db_password
-      - db_root_password               # mounted at /run/secrets/db_root_password
+      - db_password
+      - db_root_password
     volumes:
-      - mariadb:/var/lib/mysql         # persistent data
+      - mariadb:/var/lib/mysql
     networks:
       - inception
-    restart: 
-      - unless-stopped
+    restart: unless-stopped
 
-  secrets:
-    db_password:
-      file: 
-      - /secrets/db_password.txt
-    db_root_password:
-      file: 
-      - /secrets/db_root_password.txt
-    
   wordpress:
-    build: 
-      - ./requirements/wordpress
-    env_file: 
-      - .env                  # DOMAIN_NAME, MYSQL_DATABASE, MYSQL_USER, WP_ADMIN_USER etc.
+    build:
+      context: ./requirements/wordpress
+      dockerfile: Dockerfile
+    image: wordpress
+    env_file:
+      - .env
     secrets:
-      - db_password                    # /run/secrets/db_password
-      - credentials                    # /run/secrets/credentials (WP admin password)
+      - db_password
+      - credentials
     volumes:
-      - wordpress:/var/www/html        # shared with NGINX
+      - wordpress:/var/www/html
     networks:
       - inception
     depends_on:
-      - mariadb                        # start mariadb first
-    restart: 
-      - unless-stopped
+      - mariadb
+    restart: unless-stopped
 
   nginx:
-    build: 
-      - ./requirements/nginx
-    env_file: 
-      - .env              # needs DOMAIN_NAME for the cert and server_name
+    build:
+      context: ./requirements/nginx
+      dockerfile: Dockerfile
+    image: nginx
+    env_file:
+      - .env
     ports:
-      - "443:443"                  # only exposed port in the entire project
+      - "443:443"
     volumes:
-      - wordpress:/var/www/html    # same volume as wordpress container
+      - wordpress:/var/www/html
     networks:
       - inception
     depends_on:
-      - wordpress                  # start wordpress first
-    restart: 
-      - unless-stopped
+      - wordpress
+    restart: unless-stopped
+
 volumes:
-    mariadb:
-      driver: local
-      driver_opts:
-        type: none
-        o: bind
-        device: /home/jpflegha/data/mariadb
-    
-    wordpress:
-      driver: local
-      driver_opts:
-        type: none
-        o: bind
-        device: /home/jpflegha/data/wordpress
-  
+  mariadb:
+    driver: local
+    driver_opts:
+      type: none
+      o: bind
+      device: /home/yourlogin/data/mariadb
+  wordpress:
+    driver: local
+    driver_opts:
+      type: none
+      o: bind
+      device: /home/yourlogin/data/wordpress
+
 networks:
-    inception:
-      driver: bridge
-  
+  inception:
+    driver: bridge
+
 secrets:
-    db_password:
-      file: ../secrets/db_password.txt
-    db_root_password:
-      file: ../secrets/db_root_password.txt
-    credentials:
-      file: ../secrets/credentials.txt
+  db_password:
+    file: ../secrets/db_password.txt
+  db_root_password:
+    file: ../secrets/db_root_password.txt
+  credentials:
+    file: ../secrets/credentials.txt
