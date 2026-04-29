@@ -5,6 +5,7 @@ RUN apt-get update && apt-get install -y \
     php-fpm \
     php-mysql \
     curl \
+    default-mysql-client \
     && rm -rf /var/lib/apt/lists/*
 
 # Download wp-cli, make it executable, and move it to a system-wide location
