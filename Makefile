@@ -3,7 +3,7 @@ DATA_PATH = /home/jpflegha/data
 COMPOSE = docker compose -f src/docker-compose.yaml
 
 all: $(DATA_PATH)
-	service docker start
+	rc-service docker start
 	$(COMPOSE) up -d --build
 
 $(DATA_PATH):
@@ -15,7 +15,11 @@ down:
 
 clean: down
 	$(COMPOSE) down -v --rmi all
-	#sudo rm -fr $(DATA_PATH)
+
+fclean: down
+	docker system prune -a --volumes -f
+	sudo rm -rf $(DATA_PATH)/mariadb
+	sudo rm -rf $(DATA_PATH)/wordpress
 
 re: clean all
 
