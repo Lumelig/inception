@@ -3,7 +3,7 @@
 DB_PASSWORD=$(cat /run/secrets/db_password)
 
 echo "Waiting for MariaDB..."
-while ! mysqladmin ping -h mariadb -u ${MYSQL_USER} -p ${DB_PASSWORD}; do
+while ! mysqladmin ping -h mariadb --silent; do
     sleep 1
 done
 echo "MariaDB is ready"
