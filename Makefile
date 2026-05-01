@@ -20,7 +20,7 @@ fclean: down
 	docker system prune -a --volumes -f
 	docker volume rm $$(docker volume ls -q) 2>/dev/null || true
 	docker network rm $$(docker network ls -q) 2>/dev/null || true
-	rm -rf $(DATA_PATH)
+	sudo rm -rf $(DATA_PATH)
 
 re: fclean all
 
