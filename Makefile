@@ -3,7 +3,7 @@ DATA_PATH = /home/jpflegha/data
 COMPOSE = docker compose -f src/docker-compose.yaml
 
 all: setup
-	rc-service docker start
+	#rc-service docker start
 	$(COMPOSE) up -d --build
 
 setup:
