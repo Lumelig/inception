@@ -5,7 +5,7 @@ chown -R mysql:mysql /run/mysqld
 #Create the directory for the socket file and give ownership to the mysql user. Without this MariaDB can't start.
 
 #This check prevents re-initializing every time
-if [ ! -d "/var/lib/mysql/mysql" ]; then
+if [ ! -d "/var/lib/mysql/${MYSQL_DATABASE}" ]; then
     echo ">>> First time init — creating database and user..."
     mysql_install_db --user=mysql --datadir=/var/lib/mysql > /dev/null
     
