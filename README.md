@@ -1,6 +1,6 @@
-#Inception
+# Inception
 
-##Description
+## Description
 This project has been created as part of the 42 curriculum by jpflegha
 
 Descripyion
