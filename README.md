@@ -124,9 +124,9 @@ make lage <docker_name>
 If you want to use w3m, for the website:
 ```
 w3m -o ssl_verify_server=0 https://localhost:443
-
-You can change the `localhost` with your `DOMAIN_NAME` from your .env file.
 ```
+You can change the `localhost` with your `DOMAIN_NAME` from your .env file.
+
 
 ### Notes
 - **Data is stored using Docker volumes to keep it persistent**
