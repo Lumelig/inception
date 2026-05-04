@@ -22,18 +22,31 @@ Docker Compose is used to define, link, and run all containers together from a s
 ### 🖥️ Virtual Machine vs Docker
 |     | Virtual Machine  | Docker Container   |
 |:---------|:--------:|:----------:|
-| Isolation     | Full OS per VM  | Shares host OS kernel  |
-|Size | GBs  | MBs |
-|Startup | Minutes  | Seconds |
-|Use case | Full system emulation | Isolated app/service|
+|**Isolation** | Full OS per VM  | Shares host OS kernel  |
+|**Size** | GBs  | MBs |
+|**Startup** | Minutes  | Seconds |
+|**Use case** | Full system emulation | Isolated app/service|
 
 In this project, Docker containers are used for each service, while the entire project itself runs inside a VM — combining both worlds.
 
 ### 🔐 Secrets vs Environment Variables
 |    |Secrets  | Environment Varables |
 |:--------|:-------|:---------|
-|Storage | Stored in files, injected securely at runtime | stored in .env files or shell |
-|Security | Not exposed in `docker inspect` or logs | Can be leaked via inspection or logs |
+|**Storage** | Stored in files, injected securely at runtime | stored in .env files or shell |
+|**Security** | Not exposed in `docker inspect` or logs | Can be leaked via inspection or logs |
+|**Use case** | Passwords, credenttials | Non-sensitive config(ports, usernames) |
+
+This project uses **Docker secrets** for sensitive data (e.g., database passwords) to avoid exposing credentials in plain text. Less sensitive values use environment variables passed via `.env`.
+
+### 🌐 Docker Network vs Host Network
+|    | Docker Network | Host Network |
+|:-----|:-------|:---------|
+|**Security** | Services only talk to each other via dfined rules | All host ports exposed directly |
+|**Isolation** | Containers get their own virtual network | Container shares the host networ stack |
+|**Use case** | Multi-container apps | Low-latency single-container tool|
+
+Inception uses a **custom Docker bridge network** so that containers can communicate with each other by name (e.g., `wordpress` can reach `mariadb`), while staying isolated from the outside world. **NGINX** is the only service exposed to the host.
+
 ---
 
 ## Instructions:
