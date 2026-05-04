@@ -3,11 +3,26 @@ This project has been created as part of the 42 curriculum by jpflegha
 # Inception
 
 ## Description
-Inception is a project about learning how to use Docker to build and manage a small server infrastructure. The goal is to run multiple services (like a web server and a database) in separate containers and make them work together using Docker Compose.
+Inception is a system administration project from 42 School that introduces containerization using Docker and Docker Compose. The goal is to set up a small, multi-service infrastructure entirely inside a virtual machine, where each service runs in its own dedicated container.
+The project involves building and connecting three core services:
 
-Each service runs in its own isolated environment, which makes the system more organized and easier to manage. The project also focuses on basic concepts like networking between containers, data persistence, and simple security setup.
+NGINX — acts as the only entry point (reverse proxy) with TLS/SSL
+WordPress — the web application (with php-fpm)
+MariaDB — the database backend
 
-By doing this project, you understand how modern applications are deployed and how container-based systems work.
+All containers are built from custom Dockerfiles (based on Alpine or Debian) — no pre-built images from Docker Hub are allowed (except the base OS).
+
+### Why Docker?
+
+Docker allows us to package each service with all its dependencies into an isolated container. This makes the project reproducible, easy to configure, and cleanly separated — each service only does one thing.
+
+Docker Compose is used to define, link, and run all containers together from a single docker-compose.yml file.
+
+### Key Desingn Comparisons
+### Virtual Machine vs Docker
+|     | Virtual Machine  | Docker Container   |
+|:---------|:--------:|----------:|
+| Isolation     | Full OS per VM  | Shares host OS kernel  |
 
 ---
 
@@ -63,7 +78,7 @@ make lage <docker_name>
 ** Containers are automatically connected through a custem network
 
 
-
+## Resources 
 
 Resources
 
