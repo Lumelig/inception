@@ -47,6 +47,18 @@ This project uses **Docker secrets** for sensitive data (e.g., database password
 
 Inception uses a **custom Docker bridge network** so that containers can communicate with each other by name (e.g., `wordpress` can reach `mariadb`), while staying isolated from the outside world. **NGINX** is the only service exposed to the host.
 
+### 💾 Docker Volumes vs Bind Mounts
+
+|  | Docker Volumes | Bind Mounts |
+|:----|:----|:----|
+|**Managed by**| Docker | Host |
+|**Portability** | High - works on any machine | Low - depens on host path |
+|**Location** | `var/lib/docker/volumes/` | Any path on the host machine|
+|**Use case**| Presistent data (DB,file) | Develoment/live code editing |
+
+This project uses Docker volumes to persist data for MariaDB and WordPress files.
+This ensures data survives container restarts and keeps the setup clean and portable.
+
 ---
 
 ## Instructions:
