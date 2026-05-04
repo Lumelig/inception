@@ -79,8 +79,8 @@ make lage <docker_name>
 ```
 
 ### Notes
-**Data is stored using Docker volumes to keep it persistent**
-**Containers are automatically connected through a custem network**
+- **Data is stored using Docker volumes to keep it persistent**
+- **Containers are automatically connected through a custem network**
 
 
 ## Resources 
