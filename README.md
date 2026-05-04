@@ -6,9 +6,9 @@ This project has been created as part of the 42 curriculum by jpflegha
 Inception is a system administration project from 42 School that introduces containerization using Docker and Docker Compose. The goal is to set up a small, multi-service infrastructure entirely inside a virtual machine, where each service runs in its own dedicated container.
 The project involves building and connecting three core services:
 
-** NGINX — acts as the only entry point (reverse proxy) with TLS/SSL
-** WordPress — the web application (with php-fpm)
-** MariaDB — the database backend
+**NGINX** — acts as the only entry point (reverse proxy) with TLS/SSL
+- **WordPress** — the web application (with php-fpm)
+**MariaDB** — the database backend
 
 All containers are built from custom Dockerfiles (based on Alpine or Debian) — no pre-built images from Docker Hub are allowed (except the base OS).
 
