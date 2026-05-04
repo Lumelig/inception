@@ -8,6 +8,7 @@ Inception is a project about learning how to use Docker to build and manage a sm
 Each service runs in its own isolated environment, which makes the system more organized and easier to manage. The project also focuses on basic concepts like networking between containers, data persistence, and simple security setup.
 
 By doing this project, you understand how modern applications are deployed and how container-based systems work.
+
 ---
 
 ## Instructions:
