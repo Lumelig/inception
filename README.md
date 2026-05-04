@@ -23,11 +23,8 @@ Docker Compose is used to define, link, and run all containers together from a s
 |     | Virtual Machine  | Docker Container   |
 |:---------|:--------:|----------:|
 | Isolation     | Full OS per VM  | Shares host OS kernel  |
-|:---------|:--------:|:---------:|
 |Size | GBs  | MBs |
-|:---------|:---------:|---------:|
 |Startup | Minutes  | Seconds |
-|:--------|:----------:|---------:|
 |Use case | Full system emulation | Isolated app/service|
 
 ---
