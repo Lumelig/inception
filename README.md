@@ -20,9 +20,9 @@ Docker Compose is used to define, link, and run all containers together from a s
 
 ### Key Desingn Comparisons
 ### Virtual Machine vs Docker
-|     | Virtual Machine  | Docker Container   |
-|:---------|:--------:|----------:|
-| Isolation     | Full OS per VM  | Shares host OS kernel  |
+    |     | Virtual Machine  | Docker Container   |
+    |:---------|:--------:|----------:|
+    | Isolation     | Full OS per VM  | Shares host OS kernel  |
 
 ---
 
