@@ -121,15 +121,23 @@ make re
 make lage <docker_name>
 ```
 
+If you want to use w3m, for the website:
+```
+w3m -o ssl_verify_server=0 https://localhost:443
+```
+
 ### Notes
 - **Data is stored using Docker volumes to keep it persistent**
 - **Containers are automatically connected through a custem network**
 
 
 ### Resources 
-- **[Docker](https://docs.docker.com/)**
+- **[Docker Docuentation](https://docs.docker.com/)**
+- **[Docker Compose Documentation](https://docs.docker.com/compose/)**
+- **[NGINX Documentation](https://nginx.org/en/docs/)**
+- **[WordPPress CLI Docuemtation](https://wp-cli.org/)**
+- **[MAriaDB Documentation](https://mariadb.com/kb/en/)**
 
 
 
 
-w3m -o ssl_verify_server=0 https://localhost:443
