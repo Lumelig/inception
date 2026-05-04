@@ -33,7 +33,7 @@ In this project, Docker containers are used for each service, while the entire p
 |    |Secrets  | Environment Varables |
 |:--------|:-------|:---------|
 |Storage | Stored in files, injected securely at runtime | stored in .env files or shell |
-|Security | Not exposed in > docker inspect> or logs | Can be leaked via inspection or logs |
+|Security | Not exposed in `docker inspect` or logs | Can be leaked via inspection or logs |
 ---
 
 ## Instructions:
