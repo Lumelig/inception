@@ -29,6 +29,11 @@ Docker Compose is used to define, link, and run all containers together from a s
 
 In this project, Docker containers are used for each service, while the entire project itself runs inside a VM — combining both worlds.
 
+### 🔐 Secrets vs Environment Variables
+|    |Secrets  | Environment Varables |
+|:--------|:-------|:---------|
+|Storage | Stored in files, injected securely at runtime | stored in .env files or shell |
+|Security | Not exposed in > docker inspect> or logs | Can be leaked via inspection or logs |
 ---
 
 ## Instructions:
