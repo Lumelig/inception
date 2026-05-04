@@ -37,6 +37,12 @@ In this project, Docker containers are used for each service, while the entire p
 |**Use case** | Passwords, credenttials | Non-sensitive config(ports, usernames) |
 
 This project uses **Docker secrets** for sensitive data (e.g., database passwords) to avoid exposing credentials in plain text. Less sensitive values use environment variables passed via `.env`.
+```
+secrets/
+├── db_password.txt
+├── db_root_password.txt
+└── credentials.txt
+```
 
 ### 🌐 Docker Network vs Host Network
 |    | Docker Network | Host Network |
@@ -82,8 +88,15 @@ cd inception
 ### Setup
 Befor running the project, you need to:
 - **Configure a .env file withe the enviroment variables (there is a example.env with the empty variables)**
+- **Creat the `db_password.txt`, `db_root_passowrd.txt` and `crededentials.txt` files and set the ppasswords**
 - **Make sure the required ports are available**
 - **Check path for volumes**
+
+### 📝 File Contents
+- `secrets/db_password.txt` - Password for the WordPress database user
+- `secrets/db_root_password.txt` - Root password for MariaDB
+- `secrets/credentials.txt` - WordPress admin credentials
+
 
 ### Execution
 Build and start the containers:
@@ -113,13 +126,10 @@ make lage <docker_name>
 - **Containers are automatically connected through a custem network**
 
 
-## Resources 
+### Resources 
+- **[Docker](https://docs.docker.com/)**
 
-Resources
 
-Virtual Machines vs Docker
-◦ Secrets vs Environment Variables
-◦ Docker Network vs Host Network
-◦ Docker Volumes vs Bind Mounts
+
 
 w3m -o ssl_verify_server=0 https://localhost:443
