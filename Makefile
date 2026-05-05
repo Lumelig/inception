@@ -1,10 +1,13 @@
 LOGIN = jpflegha
-DATA_PATH = /home/jpflegha/data
+DATA_PATH = $(HOME)/data
 COMPOSE = docker compose -f src/docker-compose.yaml
 
 all: setup
 	#rc-service docker start
 	$(COMPOSE) up -d --build
+
+up:
+	$(COMPOSE) up -d
 
 setup:
 	mkdir -p $(DATA_PATH)/mariadb

@@ -16,9 +16,10 @@ EOF
 # Using mysql command to check for database existence
 DB_EXISTS=$(mysql -u root -p"${DB_ROOT_PASSWORD}" -e "SHOW DATABASES LIKE '${MYSQL_DATABASE}';" | grep "${MYSQL_DATABASE}" || true)
 
-if [ -z "$DB_EXISTS" ]; then
+if [ -d "/var/lib/mysql/${MYSQL_DATABASE}" ]; then
+    echo ">>> Database already exists, skipping init"
+else
     echo ">>> First time init — creating database and user..."
-    mysql_install_db --user=mysql --datadir=/var/lib/mysql > /dev/null
 
     mysqld --user=mysql --bootstrap <<EOF
 FLUSH PRIVILEGES;
