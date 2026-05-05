@@ -5,9 +5,11 @@ COMPOSE = docker compose -f src/docker-compose.yaml
 all: setup
 	#rc-service docker start
 	$(COMPOSE) up -d --build
+stop:
+	$(COMPOSE) stop
 
-up:
-	$(COMPOSE) up -d
+star:
+	$(COMPOSE) start
 
 setup:
 	mkdir -p $(DATA_PATH)/mariadb
