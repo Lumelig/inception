@@ -14,7 +14,7 @@ if [ ! -d "/var/lib/mysql/${MYSQL_DATABASE}" ]; then
     until mysqladmin ping --silent 2>/dev/null; do
         sleep 1
     done
-    mysqld --user=mysql --bootstrap <<EOF
+    mysqld <<EOF
 FLUSH PRIVILEGES;
 CREATE DATABASE IF NOT EXISTS ${MYSQL_DATABASE};
 CREATE USER IF NOT EXISTS '${MYSQL_USER}'@'%' IDENTIFIED BY '${DB_PASSWORD}';
