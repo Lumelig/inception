@@ -37,6 +37,12 @@ In this project, Docker containers are used for each service, while the entire p
 |**Use case** | Passwords, credentials | Non-sensitive config (ports, usernames) |
 
 This project uses **Docker secrets** for sensitive data (e.g., database passwords) to avoid exposing credentials in plain text. Less sensitive values use environment variables passed via `.env`.
+```
+secrets/
+├── db_password.txt
+├── db_root_password.txt
+└── credentials.txt
+```
 
 ### 🌐 Docker Network vs Host Network
 |    | Docker Network | Host Network |
@@ -46,6 +52,18 @@ This project uses **Docker secrets** for sensitive data (e.g., database password
 |**Use case** | Multi-container apps | Low-latency single-container tools |
 
 Inception uses a **custom Docker bridge network** so that containers can communicate with each other by name (e.g., `wordpress` can reach `mariadb`), while staying isolated from the outside world. **NGINX** is the only service exposed to the host.
+
+### 💾 Docker Volumes vs Bind Mounts
+
+|  | Docker Volumes | Bind Mounts |
+|:----|:----|:----|
+|**Managed by**| Docker | Host |
+|**Portability** | High - works on any machine | Low - depens on host path |
+|**Location** | `var/lib/docker/volumes/` | Any path on the host machine|
+|**Use case**| Presistent data (DB,file) | Develoment/live code editing |
+
+This project uses Docker volumes to persist data for MariaDB and WordPress files.
+This ensures data survives container restarts and keeps the setup clean and portable.
 
 ---
 
@@ -71,6 +89,12 @@ Before running the project, you need to:
 - **Configure a `.env` file with the environment variables** (there is an `example.env` with the empty variables)
 - **Make sure the required ports are available**
 - **Check the path for volumes**
+
+### 📝 File Contents
+- `secrets/db_password.txt` - Password for the WordPress database user
+- `secrets/db_root_password.txt` - Root password for MariaDB
+- `secrets/credentials.txt` - WordPress admin credentials
+
 
 ### Execution
 Build and start the containers:
@@ -100,20 +124,26 @@ make re
 make logs <docker_name>
 ```
 
+If you want to use w3m, for the website:
+```
+w3m -o ssl_verify_server=0 https://localhost:443
+```
+You can change the `localhost` with your `DOMAIN_NAME` from your .env file.
+
+
 ### Notes
 - **Data is stored using Docker volumes to keep it persistent**
 - **Containers are automatically connected through a custom network**
 
 ---
 
-## Resources
+### Resources 
+- **[Docker Docuentation](https://docs.docker.com/)**
+- **[Docker Compose Documentation](https://docs.docker.com/compose/)**
+- **[NGINX Documentation](https://nginx.org/en/docs/)**
+- **[WordPPress CLI Docuemtation](https://wp-cli.org/)**
+- **[MAriaDB Documentation](https://mariadb.com/kb/en/)**
 
-- [Virtual Machines vs Docker](https://www.docker.com/resources/what-container/)
-- [Secrets vs Environment Variables](https://docs.docker.com/engine/swarm/secrets/)
-- [Docker Network vs Host Network](https://docs.docker.com/network/)
-- [Docker Volumes vs Bind Mounts](https://docs.docker.com/storage/volumes/)
 
-> **Tip:** To test via terminal without a GUI:
-> ```bash
-> w3m -o ssl_verify_server=0 https://localhost:443
-> ```
+
+
