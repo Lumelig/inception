@@ -8,7 +8,7 @@ all: setup
 stop:
 	$(COMPOSE) stop
 
-star:
+start:
 	$(COMPOSE) start
 
 setup:
