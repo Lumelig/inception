@@ -58,9 +58,9 @@ Inception uses a **custom Docker bridge network** so that containers can communi
 |  | Docker Volumes | Bind Mounts |
 |:----|:----|:----|
 |**Managed by**| Docker | Host |
-|**Portability** | High - works on any machine | Low - depens on host path |
+|**Portability** | High - works on any machine | Low - depends on host path |
 |**Location** | `var/lib/docker/volumes/` | Any path on the host machine|
-|**Use case**| Presistent data (DB,file) | Develoment/live code editing |
+|**Use case**| Persistent data (DB,file) | Development/live code editing |
 
 This project uses Docker volumes to persist data for MariaDB and WordPress files.
 This ensures data survives container restarts and keeps the setup clean and portable.
@@ -118,8 +118,7 @@ Stop, remove and start again:
 ```bash
 make re
 ```
-
-# Show the logs:
+Show the logs:
 ```bash
 make logs <docker_name>
 ```
@@ -141,8 +140,8 @@ You can change the `localhost` with your `DOMAIN_NAME` from your .env file.
 - **[Docker Docuentation](https://docs.docker.com/)**
 - **[Docker Compose Documentation](https://docs.docker.com/compose/)**
 - **[NGINX Documentation](https://nginx.org/en/docs/)**
-- **[WordPPress CLI Docuemtation](https://wp-cli.org/)**
-- **[MAriaDB Documentation](https://mariadb.com/kb/en/)**
+- **[WordPress CLI Docuementation](https://wp-cli.org/)**
+- **[MariaDB Documentation](https://mariadb.com/kb/en/)**
 
 
 
