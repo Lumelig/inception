@@ -30,8 +30,6 @@ ALTER USER 'root'@'localhost' IDENTIFIED BY '${DB_ROOT_PASSWORD}';
 FLUSH PRIVILEGES;
 EOF
     echo ">>> Init done!"
-else
-    echo ">>> Database already exists, skipping init"
 fi
 
 exec mysqld --user=mysql
