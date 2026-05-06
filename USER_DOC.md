@@ -1,76 +1,77 @@
-# User Documentation — Inception
+# User Guide — Inception
 
-## What services does this stack provide?
+## What does this project run?
 
-The Inception stack runs three services:
+The Inception project starts three services:
 
-| Service | Description | Accessible at |
+| Service | What it does | Where to find it |
 |---------|-------------|---------------|
-| **WordPress** | Full WordPress website with php-fpm | `https://chuhlig.42.fr` |
-| **WordPress Admin** | Administration dashboard | `https://chuhlig.42.fr/wp-admin` |
-| **MariaDB** | Database (internal only, not exposed to host) | — |
+| **WordPress** | Your website | `https://pflegha.42.fr` |
+| **WordPress Admin** | Admin dashboard | `https://jpflegha.42.fr/wp-admin` |
+| **MariaDB** | Database (internal only) | — |
 
-NGINX is the only entry point. Port 443 (HTTPS) is the only open port.
+Only port 443 (HTTPS) is open. All traffic goes through NGINX.
 
 ---
 
-## Starting and stopping the project
+## How to start and stop the project
 
 ### Start
 ```bash
-make up
+make
 ```
-Builds images if needed and starts all containers in the background.
+Builds and starts all containers in the background.
 
-### Stop (keep data)
+### Stop (keep your data)
 ```bash
-make down
+make stop
 ```
-Stops and removes containers and networks. Volumes and images are kept.
+Stops and removes containers. Your data stays safe.
 
-### Full reset (wipes everything)
+### Full reset (deletes everything)
 ```bash
 make fclean
 ```
-Removes all containers, images, volumes, networks, **and all data** from `/home/chuhlig/data/`. The next `make up` will start completely fresh.
+Removes all containers, images, volumes, and **all data** in `/home/$(USER)/data/`. The next `make up` starts from scratch.
 
 ### Rebuild
 ```bash
 make re
 ```
-Runs `fclean` followed by `up`.
+Runs `fclean` and then `all`.
 
 ---
 
-## Accessing the website
+## How to open the website
 
-### Prerequisites
+### Before you start
 
-Make sure `chuhlig.42.fr` resolves to localhost in `/etc/hosts`:
+Check that `$(USER).42.fr` points to localhost in your `/etc/hosts` file:
 ```bash
-grep chuhlig /etc/hosts
-# expected: 127.0.0.1 chuhlig.42.fr
+grep $(USER) /etc/hosts
+# you should see: 127.0.0.1 $(USER).42.fr
 ```
 
-If the entry is missing:
+If it's not there:
 ```bash
 sudo nano /etc/hosts
-add or update to 127.0.0.1 chuhlig.42.fr
-Ctrl+X → Y → Enter safe update
-or
-
+# Add this line:
+127.0.0.1 $(USER).42.fr
+# Save with Ctrl+X → Y → Enter
 ```
 
-### Website
-Open your browser and go to:
+### Open the website
+Go to:
 ```
-https://chuhlig.42.fr
+https://$(USER).42.fr
 ```
-A browser warning about the self-signed certificate will appear. Click **Advanced** → **Accept Risk and Continue** (Firefox) or **Proceed** (Chrome).
+Your browser will warn you about the certificate. This is normal, for a self-signed certificate.
+ click **Advanced** → **Accept Risk and Continue**
 
-### Administration Panel
-```
-https://chuhlig.42.fr/wp-admin
+### How to open the admin panel
+
+```bash
+https://$(USER).42.fr/wp-admin
 ```
 
 ---
@@ -84,48 +85,46 @@ All credentials are stored in the `secrets/` folder at the root of the repositor
 | `secrets/db_password.txt` | WordPress database user password |
 | `secrets/db_root_password.txt` | MariaDB root password |
 | `secrets/credentials.txt` | WordPress admin password |
-| `secrets/wp_user_password.txt` | WordPress editor user password |
 
 ### WordPress accounts
 
 | Role | Username | Password source |
 |------|----------|-----------------|
-| Administrator | `chuhlig` | `secrets/credentials.txt` |
-| Author | `wp_editor` | `secrets/wp_user_password.txt` |
+| Administrator | `$(USER)` | `secrets/credentials.txt` |
+| Author | `wp_editor` | `secrets/credentials.txt` |
 
 ---
 
-## Checking that services are running
+## Checking that services 
 
-### Quick status check
+### Status check
 ```bash
-docker compose -f srcs/docker-compose.yml ps
+docker ps
 ```
-All three containers (`mariadb`, `wordpress`, `nginx`) should show status `Up`.
+If all three containers (`mariadb`, `wordpress`, `nginx`) Show `Up`. Everything is fine.
 
-### Live logs
+### logs
 ```bash
 make logs
 ```
-
-### Individual container logs
+---
+### Individual docker logs
 ```bash
-docker logs mariadb
-docker logs wordpress
-docker logs nginx
+docker logs src-mariadb-1
+docker logs src-wordpress-1
+docker logs src-nginx-1
 ```
 
 ### Check volumes exist and contain data
 ```bash
 docker volume ls
-docker volume inspect srcs_wordpress_db_volume
-docker volume inspect srcs_wordpress_site_volume
+docker volume inspect src_wordpress
 ```
-The `Mountpoint` field should show a path under `/home/chuhlig/data/`.
+The `Mountpoint` field should show a path under `/home/$(USER)/data/`.
 
-### Check MariaDB is reachable
+### Make sure MariaDB is reachable
 ```bash
-docker exec -it mariadb mariadb -u wp_user -p wordpress
-# Enter the password from secrets/db_password.txt
+ docker exec -it src-mariadb-1 mariadb -u wp_user -p wordpress
+# Enter the password from secrets/db_password.txt 
 SHOW TABLES;
 ```
