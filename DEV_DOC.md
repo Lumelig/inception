@@ -30,7 +30,7 @@ newgrp docker
 ### 2. Clone the repository
 
 ```bash
-git clone git@github.com:cuhlig42/inception42.git inception
+git clone https://github.com/Lumelig/inception.git
 cd inception
 ```
 
@@ -50,17 +50,15 @@ echo "your_wp_user_password"   > secrets/wp_user_password.txt
 
 ```bash
 cat > srcs/.env << EOF
-DOMAIN_NAME=chuhlig.42.fr
+DOMAIN_NAME=jpflegha
 
 MYSQL_DATABASE=wordpress
-MYSQL_USER=wp_user
+MYSQL_USER=jenne
 MYSQL_PASSWORD_FILE=/run/secrets/db_password
 MYSQL_ROOT_PASSWORD_FILE=/run/secrets/db_root_password
 
-WP_ADMIN_USER=chuhlig
-WP_ADMIN_EMAIL=chuhlig@student.42.fr
-WP_USER=wp_editor
-WP_USER_EMAIL=wp_editor@student.42.fr
+WP_ADMIN_USER=jpflegha
+WP_ADMIN_EMAIL=jpflegha@student.42.fr
 EOF
 ```
 
@@ -68,7 +66,7 @@ EOF
 
 ```bash
 sudo nano /etc/hosts
-add or update this line "127.0.0.1 chuhlig.42.fr"
+add or update this line "127.0.0.1 jpflegha.42.fr"
 Ctrl+X → Y → Enter safe update
 ```
 
@@ -78,11 +76,11 @@ Ctrl+X → Y → Enter safe update
 
 ### Build and start all services
 ```bash
-make up
+make
 ```
 
 This does the following:
-1. Creates host data directories `~/data/db` and `~/data/wp` if they don't exist
+1. Creates host data directories, i `~/data/db` and `~/data/wp` if they don't exist
 2. Runs `docker compose -f srcs/docker-compose.yml up --build -d`
 3. Docker Compose builds each image from its Dockerfile and starts the containers
 
