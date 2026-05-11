@@ -20,7 +20,7 @@ WP_USER_PASSWORD=$(cat /run/secrets/credentials)
 : "${WP_USER_EMAIL:=jpflegha@42.fr}"
 
 echo "Waiting for MariaDB..."
-until mysqladmin ping -h mariadb -u ${MYSQL_USER} -p"$DB_PASSWORD" --silent 2>/dev/null; do
+until mysqladmin ping -h mariadb --silent 2>/dev/null; do
     echo "Waiting for MariaDB..."
     sleep 1
 done
