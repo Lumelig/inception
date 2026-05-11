@@ -4,7 +4,7 @@ services:
     build:
       context: ./requirements/mariadb
       dockerfile: Dockerfile
-    image: mariadb
+    image: mariadb:latest
     container_name: mariadb
     env_file:
       - .env
@@ -56,12 +56,14 @@ services:
 
 volumes:
   mariadb:
+    name: mariadb
     driver: local
     driver_opts:
       type: none
       o: bind
       device: /home/jpflegha/data/mariadb
   wordpress:
+    name: wordpress
     driver: local
     driver_opts:
       type: none
@@ -71,6 +73,7 @@ volumes:
 networks:
   inception:
     driver: bridge
+    name: inception
 
 secrets:
   db_password:

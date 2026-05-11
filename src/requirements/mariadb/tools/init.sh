@@ -6,6 +6,7 @@ chown -R mysql:mysql /run/mysqld
 DB_PASSWORD=$(cat /run/secrets/db_password)
 DB_ROOT_PASSWORD=$(cat /run/secrets/db_root_password)
 
+echo "MariaDB init.sh"
 if [ ! -d "/var/lib/mysql/mysql" ]; then
     echo ">>> First time init"
 
@@ -31,4 +32,5 @@ EOF
     wait $MYSQLD_PID
 fi
 
+echo "Starting MariaDB..."
 exec mysqld --user=mysql
