@@ -14,9 +14,9 @@ if [ ! -d "/var/lib/mysql/mysql" ]; then
     mysqld --user=mysql &
     MYSQLD_PID=$!
 
-    until mysqladmin ping --silent; do
-        sleep 1
-    done
+    # until mysqladmin ping --silent; do
+    #     sleep 1
+    # done
 
     mysql -u root <<EOF
 CREATE DATABASE IF NOT EXISTS \`${MYSQL_DATABASE}\`;
