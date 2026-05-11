@@ -10,7 +10,7 @@ if [ ! -d "/var/lib/mysql/${MYSQL_DATABASE}" ]; then
     mysql_install_db --user=mysql --datadir=/var/lib/mysql > /dev/null
 
     # Start temporary instance (no networking, no root password yet)
-    mysqld --user=mysql --skip-networking --skip-grant-tables &
+    mysqld --user=mysql --skip-networking --skip-grant-tables  #TOFO
     MYSQLD_PID=$!
 
     until mysqladmin ping --silent 2>/dev/null; do

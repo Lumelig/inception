@@ -5,6 +5,7 @@ COMPOSE = docker compose -f src/docker-compose.yaml
 all: setup
 	#rc-service docker start
 	$(COMPOSE) up -d --build
+
 stop:
 	$(COMPOSE) stop
 
