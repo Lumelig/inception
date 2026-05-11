@@ -20,7 +20,7 @@ WP_USER_PASSWORD=$(cat /run/secrets/credentials)
 : "${WP_USER_EMAIL:=jpflegha@42.fr}"
 
 echo "Waiting for MariaDB..."
-until mysqladmin ping -h mariadb --silent 2>/dev/null; do
+until mysqladmin ping -h mariadb --silent; do
     echo "Waiting for MariaDB..."
     sleep 1
 done
@@ -46,7 +46,7 @@ if [ ! -f "/var/www/html/wp-config.php" ]; then
         --url=https://${DOMAIN_NAME} \
         --title="Inception" \
         --admin_user=${WP_ADMIN_USER} \
-        --admin_password=$(cat /run/secrets/credentials) \
+        --admin_password=${WP_ADMIN_PASSWORD} \
         --admin_email=${WP_ADMIN_EMAIL} \
         --skip-email \
         --path=/var/www/html \
