@@ -1,6 +1,7 @@
 FROM debian:bookworm-slim
 RUN apt-get update && apt-get install -y mariadb-server \
-    && rm -fr /var/lib/apt/lists/*
+    && rm -fr /var/lib/apt/lists/* \
+    && rm -rf /var/lib/mysql/*
 # rm -fr /var/lib/apt/lists/* Deletes cached package lists after installation. Keeps the image smaller and cleaner.
 
 COPY conf/my.cnf /etc/mysql/mariadb.conf.d/z50-server.cnf
