@@ -1,7 +1,5 @@
 #!/bin/bash
 
-#!/bin/bash
-
 # Load env_file manually
 set -a
 source /etc/environment || true  # optional, if env vars are in container env
@@ -10,6 +8,7 @@ set +a
 # Secrets
 DB_PASSWORD=$(cat /run/secrets/db_password)
 WP_ADMIN_PASSWORD=$(cat /run/secrets/credentials)
+WP_USER_PASSWORD=$(cat /run/secrets/credentials)
 
 # Fallback defaults (optional)
 : "${MYSQL_USER:=jenne}"
@@ -21,7 +20,8 @@ WP_ADMIN_PASSWORD=$(cat /run/secrets/credentials)
 : "${WP_USER_EMAIL:=jpflegha@42.fr}"
 
 echo "Waiting for MariaDB..."
-until mysqladmin ping -h mariadb -u "$MYSQL_USER" -p"$DB_PASSWORD" --silent; do
+until mysqladmin ping -h mariadb -u root -p"$DB_ROOT_PASSWORD" --silent; do
+    echo "Waiting for MariaDB..."
     sleep 1
 done
 echo "MariaDB is ready"
@@ -55,7 +55,7 @@ if [ ! -f "/var/www/html/wp-config.php" ]; then
     wp user create \
         ${WP_USER} ${WP_USER_EMAIL} \
         --role=author \
-        --user_pass=${DB_PASSWORD} \
+        --user_pass=${WP_USER_PASSWORD} \
         --path=/var/www/html \
         --allow-root
 
@@ -63,5 +63,5 @@ if [ ! -f "/var/www/html/wp-config.php" ]; then
 
 fi
 
-exec php-fpm8.2 -F
+exec php-fpm -F
 #TODO
