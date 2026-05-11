@@ -23,10 +23,10 @@ clean: down
 	$(COMPOSE) down -v --rmi all
 
 fclean: down
-	docker system prune -a --volumes -f
-	docker volume rm $$(docker volume ls -q) 2>/dev/null || true
-	docker network rm $$(docker network ls -q) 2>/dev/null || true
-	sudo rm -rf $(DATA_PATH)
+	docker system prune -af
+	docker volume rm $(docker volume ls -q) 2>/dev/null || true
+	docker network rm $(docker network ls -q) 2>/dev/null || true
+	sudo rm -rf $(DATA_PATH)/wordpress $(DATA_PATH)/mariadb 
 
 re: fclean all
 
