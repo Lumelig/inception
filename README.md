@@ -143,6 +143,12 @@ You can change the `localhost` with your `DOMAIN_NAME` from your .env file.
 - **[WordPress CLI Docuementation](https://wp-cli.org/)**
 - **[MariaDB Documentation](https://mariadb.com/kb/en/)**
 
+### Use of AI
+
+I used AI for research, explanations, bug fixing, and most importantly, finding typos and improving the overall quality of my work. It was especially helpful for understanding concepts more quickly and checking for small mistakes that I might have overlooked.
+
+However, the bug-fixing aspect was mostly unsuccessful. The AI tool I used was often unable to identify the actual source of the bugs or provide effective solutions. While it occasionally pointed me in the right direction, I still had to solve most of the technical issues myself. Despite this limitation, the AI was still useful as a general assistant for writing, proofreading, and research tasks.
+
 
 
 
