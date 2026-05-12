@@ -1,10 +1,5 @@
 #!/bin/bash
 
-# Load env_file manually
-set -a
-source /etc/environment || true  # optional, if env vars are in container env
-set +a
-
 # Secrets
 DB_PASSWORD=$(cat /run/secrets/db_password)
 WP_ADMIN_PASSWORD=$(cat /run/secrets/credentials)
@@ -24,7 +19,7 @@ if [ ! -f "/var/www/html/wp-config.php" ]; then
     wp core download \
         --path=/var/www/html \
         --allow-root
-    echo "DEBUG: MYSQL_USER=$MYSQL_USER, MYSQL_DATABASE=$MYSQL_DATABASE, DB_PASSWORD=$DB_PASSWORD"
+    # echo "DEBUG: MYSQL_USER=$MYSQL_USER, MYSQL_DATABASE=$MYSQL_DATABASE, DB_PASSWORD=$DB_PASSWORD"
     wp config create \
         --dbname=${MYSQL_DATABASE} \
         --dbuser=${MYSQL_USER} \
