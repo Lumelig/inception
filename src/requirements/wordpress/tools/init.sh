@@ -10,14 +10,6 @@ DB_PASSWORD=$(cat /run/secrets/db_password)
 WP_ADMIN_PASSWORD=$(cat /run/secrets/credentials)
 WP_USER_PASSWORD=$(cat /run/secrets/credentials)
 
-# Fallback defaults (optional)
-: "${MYSQL_USER:=jenne}"
-: "${MYSQL_DATABASE:=wordpress}"
-: "${DOMAIN_NAME:=jpflegha.42.fr}"
-: "${WP_ADMIN_USER:=jenne}"
-: "${WP_ADMIN_EMAIL:=jpflegha@42.fr}"
-: "${WP_USER:=regularuser}"
-: "${WP_USER_EMAIL:=jpflegha@42.fr}"
 
 until bash -c "echo >/dev/tcp/mariadb/3306" 2>/dev/null; do
     echo "Waiting for MariaDB..."
