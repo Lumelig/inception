@@ -3,7 +3,7 @@
 # Secrets
 DB_PASSWORD=$(cat /run/secrets/db_password)
 WP_ADMIN_PASSWORD=$(cat /run/secrets/credentials)
-WP_USER_PASSWORD=$(cat /run/secrets/credentials)
+WP_USER_PASSWORD=$(cat /run/secrets/wp_user_password.txt)
 
 
 until bash -c "echo >/dev/tcp/mariadb/3306" 2>/dev/null; do
