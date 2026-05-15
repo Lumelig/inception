@@ -49,7 +49,7 @@ echo "your_wp_user_password"   > secrets/wp_user_password.txt
 ### 4. Create the `.env` file
 
 ```bash
-cat > srcs/.env << EOF
+cat > src/.env << EOF
 DOMAIN_NAME=jpflegha
 
 MYSQL_DATABASE=wordpress
